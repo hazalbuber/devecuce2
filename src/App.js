@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import GameComponent from './GameComponent';   
 import './index.css';
 
@@ -9,6 +9,17 @@ function App() {
   const [isClickable, setIsClickable] = useState(true); //Button tıklanabilirlik durumu için 
   const [isGameRunning, setIsGameRunning] = useState(true); //Oyunu çalıştırma durumu için 
 
+    // Burda oyunu başlatır ve belirli aralıklarla(2 saniye) yeni eleman seçimi yapar.
+    //useCallback eklenince sorun çözüldü!!!
+    const startGame = useCallback(() => {
+      const id = setInterval(() => {
+        const newElement = generateNewElement();
+        setElement(newElement);
+        setIsClickable(true);
+      }, 2000);
+      setTimer(id);
+    }, []); // Bağımlılık yok
+
   //oyunun çalışma durumuna göre yapılcak olay. 
   //Eğer isGameRunning değeri true ise, oyun çalışıyor demektir; false ise oyunun durduğu anlamına gelir.
   useEffect(() => {
@@ -18,21 +29,13 @@ function App() {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [isGameRunning]); 
+  }, [isGameRunning, startGame, timer]); // 'startGame' ve 'timer' eklendi
+  
+  
 
   //Math.random sayesinde rastgale deve/cüce seçimi yapılıyor
   const generateNewElement = () => {
     return Math.random() < 0.5 ? 'Deve' : 'Cüce';
-  };
-
-  // Burda oyunu başlatır ve belirli aralıklarla(2 saniye) yeni eleman seçimi yapar.
-  const startGame = () => {
-    const id = setInterval(() => {
-      const newElement = generateNewElement();
-      setElement(newElement);
-      setIsClickable(true);
-    }, 2000);
-    setTimer(id);
   };
 
 
