@@ -1,15 +1,24 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.App {
+  text-align: center;
+  margin-top: 50px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  font-size: 1.2rem;
+  margin: 10px;
+  padding: 10px 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  transform: scale(1.1); 
+}
+
+
+body {
+  background-color: lightskyblue;
+  --bs-body-font-family: var(--bs-font-monospace);
+  --bs-body-line-height: 1.4;
 }
